@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-manrope text-gray-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-manrope font-bold;
+  }
+}
+
+/* Custom component classes */
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-pill transition-all duration-200 ease-linear;
+  }
+
+  .btn-primary {
+    @apply bg-black text-white px-8 py-4 shadow-button hover:bg-gray-800 hover:shadow-soft-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-brand-purple text-white px-6 py-3 hover:bg-brand-purple-light;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-brand-purple-border text-gray-900 px-6 py-3 hover:bg-brand-purple hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-gray-700 px-4 py-2 hover:text-brand-purple;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl shadow-soft p-6 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:shadow-soft-lg hover:-translate-y-1;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/10 transition-all duration-200;
+  }
+
+  .input-glass {
+    @apply bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder:text-white/60;
+  }
+
+  .section {
+    @apply py-20 lg:py-28;
+  }
+
+  .headline-impact {
+    @apply font-impact uppercase tracking-tight leading-none;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 60px 20px rgba(144, 19, 254, 0.15);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 60px 20px rgba(255, 134, 135, 0.15);
+  }
+}
