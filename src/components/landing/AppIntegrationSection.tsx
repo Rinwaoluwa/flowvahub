@@ -1,70 +1,66 @@
-const tools = [
-    { name: 'Canva', emoji: '🎨' },
-    { name: 'ChatGPT', emoji: '🤖' },
-    { name: 'Notion', emoji: '📝' },
-    { name: 'Figma', emoji: '🎯' },
-    { name: 'Slack', emoji: '💬' },
-    { name: 'Zoom', emoji: '📹' },
-    { name: 'Spotify', emoji: '🎵' },
-    { name: 'Trello', emoji: '📋' },
-    { name: 'GitHub', emoji: '💻' },
-    { name: 'Linear', emoji: '📊' },
-    { name: 'Miro', emoji: '🖼️' },
-    { name: 'Loom', emoji: '🎬' },
-]
-
 export function AppIntegrationSection() {
     return (
-        <section className="py-24 lg:py-32 bg-soft-pink/50">
-            <div className="container">
-                <div className="text-center mb-16">
-                    <h2 className="headline-impact text-4xl md:text-5xl lg:text-6xl text-gray-900 mb-4">
-                        CONNECT YOUR TOOLS
+        <section className="flex justify-center mb-20 mx-[14px]">
+            <div className="xl:max-w-[80%] w-full flex flex-col lg:flex-row items-center gap-8">
+                {/* Left Card - Download */}
+                <div className="bg-[#FFD7D780] max-w-[580px] w-full rounded-[16px] md:rounded-[32px] p-[16px] md:p-[40px]">
+                    <button className="p-[10px_16px] bg-[#0000000D] text-sm rounded-[100px] mb-4 font-manrope font-semibold">
+                        Download
+                    </button>
+                    <h2 className="mt-5 mb-3 text-[20px] md:text-[32px] font-semibold font-manrope">
+                        ORGANIZE, DISCOVER, AND EARN ON THE GO.
                     </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Integrate with hundreds of your favorite apps and manage them all from one place.
-                    </p>
+
+                    <div className="flex flex-col md:flex-row items-center justify-center my-3 gap-5">
+                        <div className="bg-[#FFFFFF] shadow-[1px_4px_10px_0px_#ABABAB1A,2px_17px_17px_0px_#ABABAB17,5px_39px_24px_0px_#ABABAB0D,9px_69px_28px_0px_#ABABAB03,15px_108px_30px_0px_#ABABAB00] rounded-[32px] w-full flex-1 p-[16px] md:p-[24px]">
+                            <div className="flex flex-col text-[20px] gap-4">
+                                <button className="bg-[#F1F1F1] flex justify-center items-center gap-2 rounded-[100px] p-[16px] w-full hover:bg-gray-200 transition-colors">
+                                    <img src="/appstore.svg" alt="App Store Icon" />
+                                    <span className="font-manrope font-bold text-sm">Apple App Store</span>
+                                </button>
+                                <button className="bg-[#F1F1F1] flex justify-center items-center gap-2 rounded-[100px] p-[16px] w-full hover:bg-gray-200 transition-colors">
+                                    <img src="/playstore.svg" alt="Play Store Icon" />
+                                    <span className="font-manrope font-bold text-sm">Google Play Store</span>
+                                </button>
+                            </div>
+                            <div className="mt-5 flex justify-center md:hidden">
+                                <img src="/barcode.png" alt="Barcode" />
+                            </div>
+                        </div>
+                        <div className="hidden -ml-8 md:block">
+                            <img src="/barcode.png" alt="Barcode" className='h-[208px]' style={{height: 140}} />
+                        </div>
+                    </div>
+
+                    <button className="rounded-[100px] bg-[#FFFFFFCC] w-full mt-3 p-[16px] md:p-[24px] text-[20px] text-start font-manrope font-bold">
+                        ⌛ Coming soon
+                    </button>
                 </div>
 
-                {/* Tools Grid */}
-                <div className="grid grid-cols-4 md:grid-cols-6 gap-4 lg:gap-6 max-w-4xl mx-auto mb-16">
-                    {tools.map((tool, i) => (
-                        <div
-                            key={i}
-                            className="bg-white rounded-2xl shadow-soft p-4 flex flex-col items-center justify-center gap-2 hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-200"
-                        >
-                            <span className="text-3xl md:text-4xl">{tool.emoji}</span>
-                            <span className="text-xs md:text-sm font-medium text-gray-600 text-center">{tool.name}</span>
-                        </div>
-                    ))}
-                </div>
+                {/* Right Card - Benefits */}
+                <div className="bg-[#111111] rounded-[16px] md:rounded-[32px] max-w-[580px] p-[16px] md:p-[40px] w-full text-white">
+                    <button className="p-[10px_16px] bg-[#FFFFFF3D] text-white text-sm rounded-[100px] mb-4 font-manrope font-semibold">
+                        Benefits
+                    </button>
+                    <ul className="space-y-4 my-5">
+                        <li className="flex items-center gap-4">
+                            <span className="w-4 h-4 rounded-full bg-white flex-shrink-0"></span>
+                            <span className="text-[18px] md:text-[24px] font-bold text-white font-manrope">QUICK DAILY CHECK-INS</span>
+                        </li>
+                        <li className="flex items-center gap-4">
+                            <span className="w-4 h-4 rounded-full bg-[#ffffff4f] flex-shrink-0"></span>
+                            <span className="text-[18px] md:text-[24px] font-bold text-[#ffffff4f] font-manrope">DISCOVER TOOLS ANYWHERE</span>
+                        </li>
+                        <li className="flex items-center gap-4">
+                            <span className="w-4 h-4 rounded-full bg-[#ffffff4f] flex-shrink-0"></span>
+                            <span className="text-[18px] md:text-[24px] font-bold text-[#ffffff4f] font-manrope">NEVER MISS A REWARD</span>
+                        </li>
+                    </ul>
 
-                {/* App Store Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a
-                        href="#"
-                        className="flex items-center gap-3 bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
-                    >
-                        <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                        </svg>
-                        <div className="text-left">
-                            <p className="text-[10px] opacity-80">Download on the</p>
-                            <p className="text-lg font-semibold leading-tight">App Store</p>
-                        </div>
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center gap-3 bg-gray-900 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
-                    >
-                        <svg viewBox="0 0 24 24" className="w-7 h-7 fill-current">
-                            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.921V2.735a1 1 0 01.609-.921zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
-                        </svg>
-                        <div className="text-left">
-                            <p className="text-[10px] opacity-80">GET IT ON</p>
-                            <p className="text-lg font-semibold leading-tight">Google Play</p>
-                        </div>
-                    </a>
+                    {/* Placeholder for 'How It Works' Image */}
+                    <div className="mt-10 w-full h-[200px] flex items-center justify-center">
+                        <img src="/how_it_works.png" alt="How it works" />
+                    </div>
                 </div>
             </div>
         </section>

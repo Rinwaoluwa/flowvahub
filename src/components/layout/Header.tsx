@@ -59,10 +59,9 @@ export function Header() {
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
             {/* Notification Banner */}
-            <div className="bg-black text-white text-[10px] sm:text-xs font-medium py-2 text-center relative z-50">
-                <p className="flex items-center justify-center gap-2">
-                    <span>🚀</span>
-                    <span>Big news! The full Flowva experience + mobile apps are launching soon on iOS & Android</span>
+            <div className=" bg-black text-white  flex w-full text-xs font-manrope md:text-sm h-14 items-center px-3 ">
+                <p className="text-center w-full">
+                    🚀 Big news! The full Flowva experience + mobile apps are launching soon on iOS &amp; Android
                 </p>
             </div>
 
@@ -71,14 +70,13 @@ export function Header() {
                     <div className="flex items-center justify-between h-16 lg:h-20">
                         {/* Logo */}
                         <Link to="/" className="flex items-center gap-2 group">
-                            <div className="w-9 h-9 bg-white rounded-xl flex items-center justify-center shadow-soft group-hover:shadow-purple transition-all duration-300 border border-gray-100">
-                                <span className="text-2xl">⚡</span>
+                            <div className="w-9 h-9 flex items-center justify-center">
+                                <img src="/flowva_icon.png" alt="Flowva Icon" />
                             </div>
-                            <span className="text-xl font-bold text-gray-900 tracking-tight">flowva</span>
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <nav className="hidden lg:flex items-center gap-1 bg-gray-50/80 p-1.5 rounded-full border border-gray-200/50 backdrop-blur-md">
+                        <nav className="hidden lg:flex items-center gap-1 bg-black-50/80 p-1.5 rounded-full border border-gray-200/50 backdrop-blur-md">
                             {navLinks.map((link) => (
                                 <div
                                     key={link.label}
@@ -111,7 +109,7 @@ export function Header() {
                             onMouseEnter={() => activeDropdown && setActiveDropdown(activeDropdown)}
                             onMouseLeave={handleDropdownLeave}
                         >
-                            <div className="container mx-auto max-w-5xl">
+                            <div>
                                 <div className="bg-white rounded-[40px] shadow-[0_50px_100px_-20px_rgba(120,50,255,0.15)] border border-gray-100 p-6 overflow-hidden">
 
                                     {/* Hub Dropdown */}
@@ -122,9 +120,9 @@ export function Header() {
                                                 { label: 'LIBRARY', href: '/dashboard/library', color: 'bg-orange-100', icon: '📂' },
                                                 { label: 'REWARD', href: '/dashboard/rewards', color: 'bg-pink-100', icon: '🪙' }
                                             ].map((item) => (
-                                                <Link key={item.label} to={item.href} className="group block text-center">
+                                                <Link key={item.label} to={item.href} className="group flex flex-col items-center text-center">
                                                     <div className={`
-                             aspect-[4/5] rounded-3xl ${item.color} mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-300
+                             aspect-[4/5] rounded-3xl ${item.color} h-96 mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-300
                              bg-gradient-to-br from-white/40 to-white/0
                            `}>
                                                         <div className="text-[80px] drop-shadow-2xl filter transform group-hover:-translate-y-2 transition-transform duration-500">
@@ -229,14 +227,20 @@ export function Header() {
                                 </>
                             ) : (
                                 <>
+
+
                                     <Link to="/auth/signin">
-                                        <button className="px-6 py-2.5 rounded-full bg-white text-gray-900 font-bold text-sm shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-lg transition-all border border-purple-100 hover:bg-black hover:text-white hover:border-black">
-                                            Login
+                                        <button className="w-[84px] h-[40px] text-sm font-bold border-[#9013FE1A] rounded-[100px] border p-[4px]">
+                                            <div className="h-full w-full flex justify-center items-center px-[16px] transition-all ease-linear duration-200 rounded-[100px] bg-white hover:bg-[#111111] hover:shadow-[0px_2px_4px_0px_#0000001A,0px_6px_6px_0px_#00000017,0px_14px_9px_0px_#0000000D,0px_26px_10px_0px_#00000003,0px_40px_11px_0px_#00000000,-4px_13px_19px_0px_#ECD6FF80_inset] hover:text-white relative shadow-[0px_2px_4px_0px_#0000001A]">
+                                                Login
+                                            </div>
                                         </button>
                                     </Link>
                                     <Link to="/auth/signup">
-                                        <button className="px-6 py-2.5 rounded-full bg-gradient-to-b from-[#3a3a42] to-[#2D2D35] text-white font-bold text-sm shadow-[0_4px_12px_rgba(45,45,53,0.3)] hover:shadow-[0_6px_16px_rgba(45,45,53,0.4)] hover:scale-105 transition-all ring-1 ring-purple-100/50 ring-offset-2 ring-offset-white">
-                                            Sign up
+                                        <button className="w-[84px] font-manrope h-[40px] text-sm font-bold border-[#9013FE1A] rounded-[100px] border p-[4px]">
+                                            <div className="h-full flex items-center justify-center  w-full whitespace-nowrap px-[16px] rounded-[100px] relative bg-[#111111] hover:bg-[#b362fae3] transition-all ease-linear duration-200 text-white shadow-[0px_2px_4px_0px_#0000001A,0px_6px_6px_0px_#00000017,0px_14px_9px_0px_#0000000D,0px_26px_10px_0px_#00000003,0px_40px_11px_0px_#00000000,-4px_13px_19px_0px_#ECD6FF80_inset]">
+                                                Sign up
+                                            </div>
                                         </button>
                                     </Link>
                                 </>

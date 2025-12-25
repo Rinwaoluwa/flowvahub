@@ -1,49 +1,133 @@
-const steps = [
-    {
-        number: '01',
-        title: 'Sign up for free',
-        description: 'Create your account in seconds and get 100 FlowCoins as a welcome bonus.'
-    },
-    {
-        number: '02',
-        title: 'Add your tools',
-        description: 'Browse our catalog and add the tools you already use to your personal library.'
-    },
-    {
-        number: '03',
-        title: 'Earn rewards',
-        description: 'Get FlowCoins for adding tools, writing reviews, and staying active on the platform.'
-    }
-]
+import { useState } from 'react'
 
 export function HowItWorksSection() {
-    return (
-        <section className="py-24 lg:py-32 bg-gray-900">
-            <div className="container">
-                <div className="text-center mb-16">
-                    <h2 className="headline-impact text-4xl md:text-5xl lg:text-6xl text-white mb-4">
-                        HOW IT WORKS
-                    </h2>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                        Get started in just three simple steps and start earning rewards today.
-                    </p>
-                </div>
+    const [activeStep, setActiveStep] = useState(0)
 
-                <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-                    {steps.map((step, i) => (
-                        <div key={i} className="text-center md:text-left">
-                            <div className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-2xl bg-gradient-brand text-white font-bold text-xl">
-                                {step.number}
+    const steps = [
+        {
+            id: 0,
+            number: '1',
+            title: 'Sign up & Connect',
+            subtitle: 'Set up your workspace in minutes',
+            bg: 'bg-[#ECD6FF]',
+            image: "/signin-complete.png"
+        },
+        {
+            id: 1,
+            number: '2',
+            title: 'Organize & Track',
+            subtitle: 'Add your tools, subscriptions, and tasks.',
+            bg: 'bg-[#ECD6FF]',
+            image: "/organize-track.png"
+        },
+        {
+            id: 2,
+            number: '3',
+            title: 'Earn & Enjoy',
+            subtitle: 'Check in daily, try new tools, and watch your points grow.',
+            bg: 'bg-[#ECD6FF]',
+            image: "/flowva_coins.svg"
+        }
+    ]
+
+    return (
+        <section className="my-24 px-[14px]">
+            <h2 className="text-[56px] md:text-[64px] leading-[120%] font-impact mb-10 text-center">
+                SIMPLE, REWARDING, CALM
+            </h2>
+
+            {/* Desktop View (Interactive Grid) */}
+            <div className="hidden lg:block w-full lg:w-[80%] xl:max-w-[80%] h-[552px] mx-auto">
+                <div className="flex w-full h-full gap-4">
+                    {steps.map((step, index) => {
+                        const isActive = activeStep === index
+                        return (
+                            <div
+                                key={index}
+                                onClick={() => setActiveStep(index)}
+                                className={`
+                                    ${isActive ? 'flex-[4] cursor-default' : 'flex-[1] cursor-pointer hover:flex-[1.2]'} 
+                                    relative overflow-hidden rounded-xl p-6 border border-[#0000001F] transition-all duration-500 ease-in-out
+                                    ${isActive ? 'bg-[#ECD6FF]' : 'bg-[#F5EBFF]'}
+                                `}
+                            >
+                                <div className="flex flex-col justify-between h-full whitespace-nowrap">
+                                    <h2 className="font-impact text-black text-[120px] xl:text-[180px] leading-none">
+                                        {step.number}
+                                    </h2>
+
+                                    <div className={`transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-100'}`}>
+                                        <h3 className={`text-[20px] xl:text-[36px] text-black font-manrope font-bold ${isActive ? '' : 'truncate'}`}>
+                                            {step.title}
+                                        </h3>
+
+                                        <div className={`overflow-hidden transition-all duration-500 ${isActive ? 'max-h-[100px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                                            <p className="text-[20px] text-black font-manrope font-semibold">
+                                                {step.subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                {isActive && (
+                                    <>
+                                        {index === 2 ? (
+                                            <div className="absolute right-5 top-2 w-[300px] pointer-events-none fade-in-animation">
+                                                <div className="flex  items-center gap-1">
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                </div>
+                                                <div className="flex  items-center gap-1 -ml-20">
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                </div>
+                                                <div className="flex  items-center gap-1">
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                    <img src="/flowva_coin.svg" alt="flowva_coin" />
+                                                </div>
+                                            </div>
+                                        ) :
+                                            (
+                                                <div className="absolute right-5 -top-10 w-[300px] h-full pointer-events-none fade-in-animation">
+                                                    <img src={step.image as string} alt={step.title} />
+                                                </div>
+                                            )}
+                                    </>
+
+                                )}
                             </div>
-                            <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
-                                {step.title}
-                            </h3>
-                            <p className="text-gray-400 leading-relaxed">
-                                {step.description}
-                            </p>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
+            </div>
+
+            {/* Mobile View (Stack) */}
+            <div className="flex flex-col md:flex-row justify-center lg:hidden w-full gap-4">
+                {steps.map((step, index) => (
+                    <div key={index} className="relative overflow-hidden text-black bg-[#ECD6FF] border-[#0000001F] border rounded-xl p-6 h-[407px] pb-10">
+                        <div className="flex flex-col justify-between h-full">
+                            <h2 className="font-impact text-black text-[120px] xl:text-[180px]">
+                                {step.number}
+                            </h2>
+                            <div>
+                                <h3 className="text-[36px] text-black font-manrope font-semibold">
+                                    {step.title}
+                                </h3>
+                                <p className="text-[20px] text-black font-manrope font-semibold">
+                                    {step.subtitle}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </section>
     )
