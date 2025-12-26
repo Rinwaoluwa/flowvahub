@@ -1,4 +1,3 @@
-import { Users, Briefcase } from 'lucide-react'
 import { BrandHeroContent } from './brands/BrandHeroContent'
 import { UserHeroContent } from './users/UserHeroContent'
 
@@ -9,7 +8,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ userType, setUserType }: HeroSectionProps) {
     return (
-        <section className={`relative h-auto flex flex-col pt-[25px] md:pt-[150px] overflow-hidden bg-white ${userType === 'users' ? 'pb-20' : 'pb-0'}`}>
+        <section className={`relative h-auto flex flex-col pt-[130px] md:pt-[150px] overflow-hidden bg-white ${userType === 'users' ? 'pb-20' : 'pb-0'}`}>
             {/* Toggle */}
             <div className="left-1/2 right-1/2 -translate-x-1/2 relative w-full max-w-[265px] h-[64px] flex items-center gap-[8px] rounded-[100px] p-[8px] bg-[#F9F9F9] border border-[#0000000D]">
                 <div

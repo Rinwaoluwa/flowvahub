@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
@@ -40,21 +40,31 @@ const navLinks = [
 export function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
     const { user, signOut } = useAuth()
     const navigate = useNavigate()
 
     const handleDropdownEnter = (label: string) => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current)
+            timeoutRef.current = null
+        }
         setActiveDropdown(label)
     }
 
     const handleDropdownLeave = () => {
-        setActiveDropdown(null)
+        timeoutRef.current = setTimeout(() => {
+            setActiveDropdown(null)
+            timeoutRef.current = null
+        }, 150) // Small delay to allow moving to dropdown content
     }
 
     const handleSignOut = async () => {
         await signOut()
         navigate('/')
     }
+
+    console.log("active dropdwon: ", activeDropdown)
 
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
@@ -80,7 +90,6 @@ export function Header() {
                             {navLinks.map((link) => (
                                 <div
                                     key={link.label}
-                                    className=""
                                     onMouseEnter={() => handleDropdownEnter(link.label)}
                                     onMouseLeave={handleDropdownLeave}
                                 >
@@ -100,17 +109,21 @@ export function Header() {
                             ))}
                         </nav>
 
-                        {/* Mega Menu Dropdown Container */}
                         <div
                             className={`
-                absolute top-full left-0 right-0 pt-4 px-4 transition-all duration-300 origin-top z-40
+                absolute top-16 left-0 right-0 transition-all duration-300 origin-top z-40
                 ${activeDropdown ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'}
               `}
-                            onMouseEnter={() => activeDropdown && setActiveDropdown(activeDropdown)}
+                            onMouseEnter={() => {
+                                if (timeoutRef.current) {
+                                    clearTimeout(timeoutRef.current)
+                                    timeoutRef.current = null
+                                }
+                            }}
                             onMouseLeave={handleDropdownLeave}
                         >
                             <div>
-                                <div className="bg-white rounded-[40px] shadow-[0_50px_100px_-20px_rgba(120,50,255,0.15)] border border-gray-100 p-6 overflow-hidden">
+                                <div className="bg-white shadow-[0_50px_100px_-20px_rgba(120,50,255,0.15)] border border-gray-100 p-6 overflow-hidden">
 
                                     {/* Hub Dropdown */}
                                     {activeDropdown === 'Hub' && (
@@ -221,9 +234,11 @@ export function Header() {
                                     <Link to="/dashboard">
                                         <Button variant="ghost" size="sm">Dashboard</Button>
                                     </Link>
-                                    <Button variant="outline" size="sm" onClick={handleSignOut} className="rounded-full border-gray-200 hover:border-gray-900 hover:bg-white text-gray-600 hover:text-gray-900">
-                                        Sign Out
-                                    </Button>
+                                    <button onClick={handleSignOut} className="w-[84px] font-manrope h-[40px] text-xs font-bold border-[#9013FE1A] rounded-[100px] border p-[4px]">
+                                        <div className="h-full flex items-center justify-center w-full whitespace-nowrap px-[16px] rounded-[100px] relative bg-[#111111] hover:bg-[#b362fae3] transition-all ease-linear duration-200 text-white shadow-[0px_2px_4px_0px_#0000001A,0px_6px_6px_0px_#00000017,0px_14px_9px_0px_#0000000D,0px_26px_10px_0px_#00000003,0px_40px_11px_0px_#00000000,-4px_13px_19px_0px_#ECD6FF80_inset]">
+                                            Sign Out
+                                        </div>
+                                    </button>
                                 </>
                             ) : (
                                 <>

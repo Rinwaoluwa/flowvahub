@@ -1,34 +1,6 @@
 
 import { useState } from 'react'
-import { ChevronRight } from 'lucide-react'
 import { Accordion } from '../ui/Accordion'
-
-// Inline Accordion Item to match the specific styling provided
-const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
-    const [isOpen, setIsOpen] = useState(false)
-
-    return (
-        <div className="mb-2 bg-[#F9F9F9] rounded-xl border-none overflow-hidden font-manrope">
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center p-3 md:p-4 text-left focus:outline-none"
-            >
-                <span className={`mr-3 transform transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                </span>
-                <span className="font-semibold text-[20px] md:text-[24px] text-gray-900">{question}</span>
-            </button>
-            <div
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-            >
-                <div className="p-4 pt-0 pl-11 text-gray-600 text-lg">
-                    {answer}
-                </div>
-            </div>
-        </div>
-    )
-}
 
 const faqItems = [
     {
@@ -86,7 +58,7 @@ export function FAQSection() {
                 <h2 className="text-[56px] md:text-[64px] font-impact mb-10 text-center">
                     NEED ANSWERS?
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start font-manrope">
+                <div className="grid items-start grid-cols-1 gap-4 md:grid-cols-2 font-manrope">
                     <div className="flex flex-col gap-2">
                         {faqItems.slice(0, 5).map((item, i) => (
                             <Accordion key={i} item={item} index={i} activeIndex={activeIndex as number} toggleAccordion={toggleAccordion} />

@@ -11,6 +11,8 @@ export function Settings() {
     const [saving, setSaving] = useState(false)
     const [message, setMessage] = useState('')
 
+
+
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault()
         setSaving(true)
@@ -23,6 +25,23 @@ export function Settings() {
             setTimeout(() => setMessage(''), 3000)
         }, 1000)
     }
+
+    // const handleDeleteAccount = async () => {
+    //     if (!user) return
+    //     setLoading(true)
+    //     try {
+    //         const { error } = await deleteAccount(user.id)
+    //         if (error) {
+    //             console.error('Error deleting account:', error)
+    //         } else {
+    //             navigate('/signin')
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting account:', error)
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // }
 
     return (
         <div className="max-w-2xl">
@@ -94,9 +113,14 @@ export function Settings() {
                 <p className="text-sm text-gray-500 mb-4">
                     Once you delete your account, there is no going back. Please be certain.
                 </p>
-                <Button variant="outline" className="border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400">
+                {/* <Button
+                    variant="outline"
+                    onClick={handleDeleteAccount}
+                    loading={loading}
+                    className="border-red-300 !text-red-600 hover:bg-red-50 hover:border-red-400"
+                >
                     Delete Account
-                </Button>
+                </Button> */}
             </Card>
         </div>
     )

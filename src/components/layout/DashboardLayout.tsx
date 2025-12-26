@@ -41,14 +41,10 @@ export function DashboardLayout() {
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
                 <div className="p-6 border-b border-gray-100">
-                    <a href="/" className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                                <path d="M6 12L10 8L14 12L18 8" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M6 16L10 12L14 16L18 12" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
+                    <a href="/" className="flex items-center justify-center">
+                        <div className="w-12 h-12">
+                            <img src="/flowva_icon.png" alt="Flowva Icon" />
                         </div>
-                        <span className="text-xl font-bold text-gray-900">flowva</span>
                     </a>
                 </div>
 

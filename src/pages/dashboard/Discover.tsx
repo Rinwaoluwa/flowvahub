@@ -50,7 +50,6 @@ export function Discover() {
                 .order('name')
 
             if (error) {
-                console.log('Using mock data - tools table may not exist yet')
                 setTools(mockTools)
             } else if (data && data.length > 0) {
                 setTools(data as Tool[])

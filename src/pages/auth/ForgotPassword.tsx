@@ -53,13 +53,9 @@ export function ForgotPassword() {
             <div className="w-full max-w-md">
                 {/* Logo */}
                 <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-                    <div className="w-10 h-10 bg-gradient-brand rounded-xl flex items-center justify-center">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                            <path d="M6 12L10 8L14 12L18 8" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M6 16L10 12L14 16L18 12" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                    <div className="w-10 h-10 flex items-center justify-center">
+                        <img src="/flowva_icon.png" alt="Flowva Icon" />
                     </div>
-                    <span className="text-2xl font-bold text-gray-900">flowva</span>
                 </Link>
 
                 {/* Card */}

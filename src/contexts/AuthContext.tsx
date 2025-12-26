@@ -13,6 +13,7 @@ interface AuthContextType {
     signInWithGoogle: () => Promise<{ error: AuthError | null }>
     signOut: () => Promise<void>
     resetPassword: (email: string) => Promise<{ error: AuthError | null }>
+    // deleteAccount: (id: string) => Promise<{ error: AuthError | null }>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -40,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 setSession(session)
                 setUser(session?.user ?? null)
                 if (session?.user) {
-                    await fetchProfile(session.user.id)
+                    fetchProfile(session.user.id)
                 } else {
                     setProfile(null)
                 }
@@ -112,6 +113,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { error }
     }
 
+    // const deleteAccount = async (id: string) => {
+    //     const { error } = await supabase.auth.admin.deleteUser(id)
+    //     if (!error) {
+    //         setUser(null)
+    //         setProfile(null)
+    //         setSession(null)
+    //     }
+    //     return { error }
+    // }
+
     const value = {
         user,
         profile,
@@ -121,7 +132,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signIn,
         signInWithGoogle,
         signOut,
-        resetPassword
+        resetPassword,
+        // deleteAccount
     }
 
     return (
