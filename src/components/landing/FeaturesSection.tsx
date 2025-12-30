@@ -214,7 +214,7 @@ export default function FeaturesSection() {
                 </div>
 
                 <div
-                  className={`absolute -bottom-24 left-0 right-0 text-center transition-all duration-500 delay-100 transform opacity-100 translate-y-0`}
+                  className={`absolute -bottom-20 md:-bottom-24 left-0 right-0 text-center transition-all duration-500 delay-100 transform opacity-100 translate-y-0`}
                 >
                   <h3 className="text-2xl font-bold text-gray-900">{feature.title}</h3>
                   <p className="mt-2 text-gray-600 text-sm md:text-base">{feature.description}</p>

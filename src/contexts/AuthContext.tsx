@@ -13,7 +13,8 @@ interface AuthContextType {
     signInWithGoogle: () => Promise<{ error: AuthError | null }>
     signOut: () => Promise<void>
     resetPassword: (email: string) => Promise<{ error: AuthError | null }>
-    // deleteAccount: (id: string) => Promise<{ error: AuthError | null }>
+    refreshProfile: () => Promise<void>
+    deleteAccount: () => Promise<{ error: any }>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -52,6 +53,32 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return () => subscription.unsubscribe()
     }, [])
 
+    // Real-time profile updates
+    useEffect(() => {
+        if (!user) return
+
+        const channel = supabase
+            .channel('profile-changes')
+            .on(
+                'postgres_changes',
+                {
+                    event: 'UPDATE',
+                    schema: 'public',
+                    table: 'profiles',
+                    filter: `id=eq.${user.id}`
+                },
+                (payload) => {
+                    console.log('Profile updated realtime:', payload)
+                    setProfile(payload.new as Profile)
+                }
+            )
+            .subscribe()
+
+        return () => {
+            supabase.removeChannel(channel)
+        }
+    }, [user])
+
     const fetchProfile = async (userId: string) => {
         try {
             const { data, error } = await supabase
@@ -67,6 +94,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setProfile(data)
         } catch (error) {
             console.error('Error fetching profile:', error)
+        }
+    }
+
+    const refreshProfile = async () => {
+        if (user) {
+            await fetchProfile(user.id)
         }
     }
 
@@ -113,15 +146,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { error }
     }
 
-    // const deleteAccount = async (id: string) => {
-    //     const { error } = await supabase.auth.admin.deleteUser(id)
-    //     if (!error) {
-    //         setUser(null)
-    //         setProfile(null)
-    //         setSession(null)
-    //     }
-    //     return { error }
-    // }
+    const deleteAccount = async () => {
+        const { error } = await supabase.rpc('delete_user')
+        if (!error) {
+            await signOut()
+        }
+        return { error }
+    }
 
     const value = {
         user,
@@ -133,7 +164,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signInWithGoogle,
         signOut,
         resetPassword,
-        // deleteAccount
+        refreshProfile,
+        deleteAccount
     }
 
     return (

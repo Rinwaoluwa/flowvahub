@@ -31,7 +31,6 @@ export function DashboardLayout() {
                 >
                     {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
-                <span className="text-xl font-bold">flowva</span>
             </header>
 
             {/* Sidebar */}

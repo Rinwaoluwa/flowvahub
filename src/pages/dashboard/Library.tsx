@@ -7,20 +7,21 @@ import { Tool } from '../../lib/database.types'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import { PageLoader } from '../../components/ui/Loader'
+import { mockTools } from '../../lib/constants'
 
 interface UserToolWithDetails {
     id: string
     tool_id: string
     is_favorite: boolean
     added_at: string
-    tool: Tool | null
+    tool: Tool
 }
 
 export function Library() {
     const [userTools, setUserTools] = useState<UserToolWithDetails[]>([])
     const [loading, setLoading] = useState(true)
     const [removingTool, setRemovingTool] = useState<string | null>(null)
-    const { user } = useAuth()
+    const { user, refreshProfile } = useAuth()
 
     useEffect(() => {
         if (user) {
@@ -46,8 +47,28 @@ export function Library() {
                 .eq('user_id', user.id)
                 .order('added_at', { ascending: false })
 
+            console.log("user tools: ", data, userTools)
+
             if (!error && data) {
-                setUserTools(data as unknown as UserToolWithDetails[])
+                // Map backend data to use local SVG paths from mockTools if names match (case-insensitive)
+                const toolsWithIcons = data.map((item: any) => {
+                    const toolObj = (Array.isArray(item.tool) && item.tool.length > 0) ? item.tool[0] : item.tool;
+                    if (!toolObj) return item;
+
+                    const matchingMock = mockTools.find(
+                        (mock) => mock.name.toLowerCase() === toolObj.name?.toLowerCase()
+                    );
+
+                    return {
+                        ...item,
+                        tool: {
+                            ...toolObj,
+                            // If match found, use mock icon, otherwise keep backend value
+                            icon_url: matchingMock ? matchingMock.icon_url : toolObj.icon_url,
+                        },
+                    };
+                });
+                setUserTools(toolsWithIcons as UserToolWithDetails[])
             }
         } catch {
             console.log('Could not load user tools')
@@ -66,6 +87,7 @@ export function Library() {
 
             if (!error) {
                 setUserTools(userTools.filter(ut => ut.id !== userToolId))
+                await refreshProfile(); // Update sidebar immediately
             }
         } catch {
             console.log('Could not remove tool')
@@ -115,8 +137,8 @@ export function Library() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {userTools.map(userTool => (
                         <Card key={userTool.id} padding="md" className="flex items-center gap-4">
-                            <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
-                                {userTool.tool?.icon_url || '📦'}
+                            <div className="w-14 h-14 flex items-center justify-center text-2xl flex-shrink-0">
+                                <img src={userTool.tool?.icon_url!} alt={userTool.tool?.name!} />
                             </div>
                             <div className="flex-1 min-w-0">
                                 <h3 className="font-semibold text-gray-900 truncate">
@@ -127,8 +149,8 @@ export function Library() {
                             <div className="flex items-center gap-1">
                                 <button
                                     className={`p-2 rounded-lg transition-colors ${userTool.is_favorite
-                                            ? 'text-yellow-500'
-                                            : 'text-gray-400 hover:text-yellow-500 hover:bg-gray-100'
+                                        ? 'text-yellow-500'
+                                        : 'text-gray-400 hover:text-yellow-500 hover:bg-gray-100'
                                         }`}
                                     onClick={() => toggleFavorite(userTool.id, userTool.is_favorite)}
                                     aria-label={userTool.is_favorite ? 'Remove from favorites' : 'Add to favorites'}

@@ -7,22 +7,7 @@ import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import Card from '../../components/ui/Card'
 import { PageLoader } from '../../components/ui/Loader'
-
-// Mock tools data for demo (will be replaced by Supabase data)
-const mockTools: Tool[] = [
-    { id: '1', name: 'Canva', description: 'Design platform for creating visual content', category: 'Design', icon_url: '🎨', website_url: 'https://canva.com', is_featured: true, created_at: new Date().toISOString() },
-    { id: '2', name: 'ChatGPT', description: 'AI assistant for conversations and content generation', category: 'AI', icon_url: '🤖', website_url: 'https://chat.openai.com', is_featured: true, created_at: new Date().toISOString() },
-    { id: '3', name: 'Zoom', description: 'Video conferencing and virtual meetings', category: 'Communication', icon_url: '📹', website_url: 'https://zoom.us', is_featured: true, created_at: new Date().toISOString() },
-    { id: '4', name: 'Notion', description: 'All-in-one workspace for notes and docs', category: 'Productivity', icon_url: '📝', website_url: 'https://notion.so', is_featured: true, created_at: new Date().toISOString() },
-    { id: '5', name: 'Slack', description: 'Team communication and messaging platform', category: 'Communication', icon_url: '💬', website_url: 'https://slack.com', is_featured: false, created_at: new Date().toISOString() },
-    { id: '6', name: 'Figma', description: 'Collaborative design and prototyping tool', category: 'Design', icon_url: '🎯', website_url: 'https://figma.com', is_featured: true, created_at: new Date().toISOString() },
-    { id: '7', name: 'Spotify', description: 'Music streaming for focus and productivity', category: 'Entertainment', icon_url: '🎵', website_url: 'https://spotify.com', is_featured: false, created_at: new Date().toISOString() },
-    { id: '8', name: 'Trello', description: 'Kanban-style project management', category: 'Productivity', icon_url: '📋', website_url: 'https://trello.com', is_featured: false, created_at: new Date().toISOString() },
-    { id: '9', name: 'GitHub', description: 'Code hosting and version control', category: 'Development', icon_url: '💻', website_url: 'https://github.com', is_featured: true, created_at: new Date().toISOString() },
-    { id: '10', name: 'Linear', description: 'Modern issue tracking for teams', category: 'Productivity', icon_url: '📊', website_url: 'https://linear.app', is_featured: false, created_at: new Date().toISOString() },
-    { id: '11', name: 'Miro', description: 'Online whiteboard for collaboration', category: 'Design', icon_url: '🎨', website_url: 'https://miro.com', is_featured: false, created_at: new Date().toISOString() },
-    { id: '12', name: 'Loom', description: 'Video messaging for work', category: 'Communication', icon_url: '🎬', website_url: 'https://loom.com', is_featured: false, created_at: new Date().toISOString() },
-]
+import { mockTools } from '../../lib/constants'
 
 const categories = ['All', 'Design', 'AI', 'Communication', 'Productivity', 'Development', 'Entertainment']
 
@@ -33,7 +18,7 @@ export function Discover() {
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('All')
     const [addingTool, setAddingTool] = useState<string | null>(null)
-    const { user } = useAuth()
+    const { user, refreshProfile } = useAuth()
 
     useEffect(() => {
         loadTools()
@@ -52,7 +37,20 @@ export function Discover() {
             if (error) {
                 setTools(mockTools)
             } else if (data && data.length > 0) {
-                setTools(data as Tool[])
+                // Map backend data to use local SVG paths from mockTools if names match (case-insensitive)
+                const toolsWithIcons = data.map((tool) => {
+                    const matchingMock = mockTools.find(
+                        (mock) => mock.name.toLowerCase() === tool.name.toLowerCase()
+                    );
+
+                    return {
+                        ...tool,
+                        // If match found, use mock icon, otherwise keep backend value
+                        icon_url: matchingMock ? matchingMock.icon_url : tool.icon_url,
+                    };
+                });
+
+                setTools(toolsWithIcons as Tool[])
             } else {
                 setTools(mockTools)
             }
@@ -91,6 +89,7 @@ export function Discover() {
 
             if (!error) {
                 setUserToolIds([...userToolIds, toolId])
+                await refreshProfile() // Update sidebar coins immediately
             }
         } catch {
             console.log('Could not add tool to library')
@@ -155,7 +154,7 @@ export function Discover() {
                     {filteredTools.map(tool => (
                         <Card key={tool.id} hoverable padding="md" className="flex flex-col gap-3">
                             <div className="flex items-center justify-between">
-                                <span className="text-4xl">{tool.icon_url}</span>
+                                <img src={tool.icon_url!} alt={tool.name} className='h-8 w-8' />
                                 {tool.is_featured && (
                                     <span className="px-2 py-1 text-xs font-semibold text-brand-purple bg-brand-purple/10 rounded-full">
                                         Featured

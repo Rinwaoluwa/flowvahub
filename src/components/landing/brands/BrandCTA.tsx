@@ -1,13 +1,11 @@
-import { PlaceholderImage } from '../../ui/PlaceholderImage';
-
 export function BrandCTA() {
     return (
         <section className="w-full flex justify-center my-24 px-[14px]">
             <div className="bg-[#1365FE] md:max-w-[80%] flex justify-center p-[32px] w-full rounded-[16px] md:rounded-[32px] min-h-[662px]">
                 <div className="max-w-[750px] w-full">
                     <h2 className="text-[40px] md:text-[48px] text-white font-[impact] text-center">START YOUR CAMPAIGN</h2>
-                    <div className="flex justify-center mt-5 md:mt-10">
-                        <PlaceholderImage text="Handshake 3D Icon" width="442px" height="300px" bgColor="bg-white/10" className="rounded-xl" />
+                    <div className="flex justify-center mt-5 md:mt-10 h-64">
+                        <img src="/hand-shake.png" alt="Handshake" />
                     </div>
                     <p className="text-center text-[20px] text-[#FFFFFF] mt-8">Flowva works with brands to give our users exclusive discounts, cashback, and perks.</p>
                     <button className="mt-10 left-1/2 font-manrope right-1/2 -translate-x-1/2 relative w-[232px] text-sm font-bold border-[#9013FE1A] rounded-[100px] border p-[6px]">

@@ -19,7 +19,7 @@ export function CallToActionSection() {
                 </div>
 
                 {/* Floating Decoration Coins Left */}
-                <div className="absolute -left-16 top-[60%] md:-left-10 md:top-1/2 md:-translate-y-1/2">
+                <div className="absolute hidden md:block -left-10 top-1/2 -translate-y-1/2">
                     <img src="/flowva_coin.svg" alt="flowva_coin" />
                     <img src="/flowva_coin.svg" className="ml-28" alt="flowva_coin" />
                     <img src="/flowva_coin.svg" className="ml-24" alt="flowva_coin" />
@@ -27,7 +27,7 @@ export function CallToActionSection() {
                 </div>
 
                 {/* Floating Decoration Coins Right */}
-                <div className="absolute -right-24 -top-[68%] rotate-180 transition md:-right-10 md:top-1/2 md:-translate-y-1/2">
+                <div className="absolute hidden md:block -right-10 top-1/2 -translate-y-1/2 rotate-180">
                     <img src="/flowva_coin.svg" alt="flowva_coin" />
                     <img src="/flowva_coin.svg" className="ml-28" alt="flowva_coin" />
                     <img src="/flowva_coin.svg" className="ml-24" alt="flowva_coin" />

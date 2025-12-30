@@ -3,7 +3,7 @@
 A full-stack recreation of the Flowvahub Rewards page, built as part of a technical assessment. This project demonstrates seamless integration between a React frontend and a Supabase backend to manage user authentication, real-time database queries, and automated reward logic.
 
 ## 🚀 Live Demo
-**URL:** [https://flowva-rewards.vercel.app](https://flowva-rewards.vercel.app) *(Note: User must update this with actual deployment URL)*
+**URL:** [flowvahub](https://flowvahub-2z9f.vercel.app/)
 
 ## ✨ Key Features
 - **Secure Authentication**: Handles Sign Up, Login, and Sign Out using Supabase Auth.

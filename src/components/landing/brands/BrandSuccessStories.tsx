@@ -11,10 +11,10 @@ export function BrandSuccessStories() {
             <h2 className="text-[56px] md:text-[64px] font-[impact] text-center">Success Stories</h2>
             <p className="text-[20px] manrope text-center text-[#0000009e] mb-10">Tools That Found Their Audience with Flowva</p>
             <div className="flex justify-center">
-                <div className="w-full md:max-w-[80%] overflow-x-auto pb-4 no-scrollbar">
+                <div className="w-full md:max-w-[80%] overflow-x-auto pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex gap-[30px]" style={{ width: 'max-content' }}>
                         {/* Card 1 */}
-                        <div className="p-6 rounded-xl shadow-md flex flex-col justify-between w-[324px] h-[320px]" style={{ backgroundColor: 'rgb(93, 206, 255)' }}>
+                        <div className="p-6 rounded-xl shadow-md flex flex-col justify-between w-[324px] h-fit" style={{ backgroundColor: 'rgb(93, 206, 255)' }}>
                             <p className="text-[24px] font-semibold mb-4 font-manrope">Flowva gave us a new channel of discovery. Users were genuinely interested and engagement was higher than on ads.</p>
                             <div className="flex gap-2 items-center">
                                 <div className="h-10 w-10 justify-center items-center flex rounded-full bg-white">
@@ -24,7 +24,7 @@ export function BrandSuccessStories() {
                             </div>
                         </div>
                         {/* Card 2 */}
-                        <div className="p-6 rounded-xl shadow-md flex flex-col justify-between w-[324px] h-[320px]" style={{ backgroundColor: 'rgb(183, 255, 40)' }}>
+                        <div className="p-6 rounded-xl shadow-md flex flex-col justify-between w-[324px] h-fit" style={{ backgroundColor: 'rgb(183, 255, 40)' }}>
                             <p className="text-[24px] font-semibold mb-4 font-manrope">Seamless and simple our sign-ups grew with no extra work on our end.</p>
                             <div className="flex gap-2 items-center">
                                 <div className="h-10 w-10 justify-center items-center flex rounded-full bg-white">
@@ -34,7 +34,7 @@ export function BrandSuccessStories() {
                             </div>
                         </div>
                         {/* Card 3 */}
-                        <div className="p-6 rounded-xl shadow-md flex flex-col justify-between w-[324px] h-[320px]" style={{ backgroundColor: 'rgb(93, 255, 233)' }}>
+                        <div className="p-6 rounded-xl shadow-md flex flex-col justify-between w-[324px] h-fit" style={{ backgroundColor: 'rgb(93, 255, 233)' }}>
                             <p className="text-[24px] font-semibold mb-4 font-manrope">Users loved our cashback perk, and Flowva made the process seamless.</p>
                             <div className="flex gap-2 items-center">
                                 <div className="h-10 w-10 justify-center items-center flex rounded-full bg-white">

@@ -1,47 +1,75 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
+import { supabase } from '../../lib/supabase'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
 import Card from '../../components/ui/Card'
 
+import { Modal } from '../../components/ui/Modal'
+
 export function Settings() {
-    const { user, profile } = useAuth()
+    const { user, profile, signOut, refreshProfile, deleteAccount } = useAuth()
     const [fullName, setFullName] = useState(profile?.full_name || '')
     const [username, setUsername] = useState(profile?.username || '')
     const [saving, setSaving] = useState(false)
     const [message, setMessage] = useState('')
-
-
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+    const [deleting, setDeleting] = useState(false)
+    const navigate = useNavigate()
 
     const handleSave = async (e: React.FormEvent) => {
         e.preventDefault()
         setSaving(true)
         setMessage('')
 
-        // In a real implementation, this would update the profile in Supabase
-        setTimeout(() => {
-            setSaving(false)
+        if (!user) return
+
+        try {
+            const { error } = await supabase
+                .from('profiles')
+                .update({
+                    full_name: fullName,
+                    username: username,
+                    updated_at: new Date().toISOString(),
+                })
+                .eq('id', user.id)
+
+            if (error) throw error
+
+            await refreshProfile() // Update sidebar with new name immediately
             setMessage('Settings saved successfully!')
-            setTimeout(() => setMessage(''), 3000)
-        }, 1000)
+        } catch (error) {
+            console.error('Error updating profile:', error)
+            setMessage('Error saving settings. Please try again.')
+        } finally {
+            setSaving(false)
+            setTimeout(() => setMessage(''), 1000)
+        }
     }
 
-    // const handleDeleteAccount = async () => {
-    //     if (!user) return
-    //     setLoading(true)
-    //     try {
-    //         const { error } = await deleteAccount(user.id)
-    //         if (error) {
-    //             console.error('Error deleting account:', error)
-    //         } else {
-    //             navigate('/signin')
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting account:', error)
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // }
+    const confirmDeleteAccount = async () => {
+        if (!user) return
+
+        setDeleting(true)
+        try {
+            const { error } = await deleteAccount()
+
+            if (error) {
+                console.error('Error deleting account:', error)
+                alert('Failed to delete account data. Please contact support.')
+            } else {
+                await signOut()
+                navigate('/auth/signin')
+            }
+        } catch (error) {
+            console.error('Error deleting account:', error)
+        } finally {
+            setDeleting(false)
+            setDeleteModalOpen(false)
+        }
+
+    }
 
     return (
         <div className="max-w-2xl">
@@ -78,7 +106,9 @@ export function Settings() {
                     />
 
                     {message && (
-                        <p className="text-sm text-green-500">{message}</p>
+                        <p className={`text-sm ${message.includes('Error') ? 'text-red-500' : 'text-green-500'}`}>
+                            {message}
+                        </p>
                     )}
 
                     <Button type="submit" loading={saving} className="self-start">
@@ -113,15 +143,42 @@ export function Settings() {
                 <p className="text-sm text-gray-500 mb-4">
                     Once you delete your account, there is no going back. Please be certain.
                 </p>
-                {/* <Button
+                <Button
                     variant="outline"
-                    onClick={handleDeleteAccount}
-                    loading={loading}
+                    onClick={() => setDeleteModalOpen(true)}
                     className="border-red-300 !text-red-600 hover:bg-red-50 hover:border-red-400"
                 >
                     Delete Account
-                </Button> */}
+                </Button>
             </Card>
+
+            <Modal
+                isOpen={deleteModalOpen}
+                onClose={() => setDeleteModalOpen(false)}
+                title="Delete Account"
+                footer={
+                    <>
+                        <Button variant="ghost" onClick={() => setDeleteModalOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="primary"
+                            className="!bg-red-600 hover:!bg-red-700 !border-red-600"
+                            loading={deleting}
+                            onClick={confirmDeleteAccount}
+                        >
+                            Yes, delete my account
+                        </Button>
+                    </>
+                }
+            >
+                <div className="text-gray-600">
+                    <p className="mb-4">Are you absolutely sure you want to delete your account?</p>
+                    <p className="bg-red-50 text-red-800 p-3 rounded-lg text-sm">
+                        ⚠️ This action cannot be undone. All your data, including your library and settings, will be permanently removed.
+                    </p>
+                </div>
+            </Modal>
         </div>
     )
 }

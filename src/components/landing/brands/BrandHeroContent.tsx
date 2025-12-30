@@ -1,5 +1,3 @@
-import { PlaceholderImage } from '../../ui/PlaceholderImage';
-
 export function BrandHeroContent() {
     return (
         <div>
@@ -24,7 +22,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Brevo" className="w-full h-full" />
+                                    <img src="/brevo.svg" alt="Brevo Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(249, 255, 246)', color: 'black' }}>
                                     <a href="https://get.brevo.com/9vml1qjuxigb" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -44,7 +42,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Jotform" className="w-full h-full" />
+                                    <img src="/jotform.svg" alt="Jotform Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(245, 215, 197)', color: 'black' }}>
                                     <a href="https://www.jotform.com/ai/agents/?partner=flowvahub-WOAEEuoEob" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -64,7 +62,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Monday" className="w-full h-full" />
+                                     <img src="/monday.svg" alt="Monday Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(184, 184, 250)', color: 'white' }}>
                                     <a href="https://try.monday.com/b7pem672ddxh" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -84,7 +82,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Reclaim" className="w-full h-full" />
+                                    <img src="/reclaim.svg" alt="Reclaim Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(255, 255, 255)', color: 'black' }}>
                                     <a href="https://go.reclaim.ai/ur9i6g5eznps" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -106,7 +104,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Brevo" className="w-full h-full" />
+                                    <img src="/brevo.svg" alt="Brevo Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(249, 255, 246)', color: 'black' }}>
                                     <a href="https://get.brevo.com/9vml1qjuxigb" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -126,7 +124,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Jotform" className="w-full h-full" />
+                                    <img src="/jotform.svg" alt="Jotform Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(245, 215, 197)', color: 'black' }}>
                                     <a href="https://www.jotform.com/ai/agents/?partner=flowvahub-WOAEEuoEob" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -146,7 +144,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Monday" className="w-full h-full" />
+                                    <img src="/monday.svg" alt="Monday Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(184, 184, 250)', color: 'white' }}>
                                     <a href="https://try.monday.com/b7pem672ddxh" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>
@@ -166,7 +164,7 @@ export function BrandHeroContent() {
                         <div className="flip-card w-[168px] h-[148px] md:w-[421px] md:h-[369px] rounded-[16px] md:rounded-[32px]" tabIndex={0} role="button" aria-pressed="false">
                             <div className="flip-card-inner ">
                                 <div className="flip-card-front w-full h-full border !rounded-[16px] md:!rounded-[32px] overflow-hidden border-[#e0e0e0] bg-white">
-                                    <PlaceholderImage text="Reclaim" className="w-full h-full" />
+                                    <img src="/reclaim.svg" alt="Reclaim Banner" />
                                 </div>
                                 <div className="flip-card-back w-full h-full flex flex-col border border-[#e0e0e0] !rounded-[16px] md:!rounded-[32px] items-center justify-center text-center p-4" style={{ backgroundColor: 'rgb(255, 255, 255)', color: 'black' }}>
                                     <a href="https://go.reclaim.ai/ur9i6g5eznps" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg flex gap-3 items-center font-bold mb-2 p-[10px_16px] rounded-[24px]" style={{ backgroundColor: 'rgba(0, 0, 0, 0.145)' }}>

@@ -75,6 +75,14 @@ export function Header() {
                 </p>
             </div>
 
+            {/* Backdrop for Dropdown */}
+            {activeDropdown && (
+                <div
+                    className="fixed inset-0 bg-black/60 backdrop-blur-sm -z-10 transition-opacity duration-300 pointer-events-none"
+                    aria-hidden="true"
+                />
+            )}
+
             <header className="bg-white/80 backdrop-blur-lg border-b border-gray-100 transition-all duration-300 relative z-40">
                 <div className="container">
                     <div className="flex items-center justify-between h-16 lg:h-20">
@@ -127,7 +135,7 @@ export function Header() {
 
                                     {/* Hub Dropdown */}
                                     {activeDropdown === 'Hub' && (
-                                        <div className="grid grid-cols-3 gap-6">
+                                        <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
                                             {[
                                                 { label: 'DISCOVER', href: '/dashboard/discover', color: 'bg-purple-100', icon: '🧭' },
                                                 { label: 'LIBRARY', href: '/dashboard/library', color: 'bg-orange-100', icon: '📂' },
@@ -136,7 +144,7 @@ export function Header() {
                                                 <Link key={item.label} to={item.href} className="group flex flex-col items-center text-center">
                                                     <div className={`
                              aspect-[4/5] rounded-3xl ${item.color} h-96 mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-300
-                             bg-gradient-to-br from-white/40 to-white/0
+                             bg-gradient-to-br from-white/40 to-white/0 w-full
                            `}>
                                                         <div className="text-[80px] drop-shadow-2xl filter transform group-hover:-translate-y-2 transition-transform duration-500">
                                                             {item.icon}
@@ -200,7 +208,7 @@ export function Header() {
 
                                     {/* Community Dropdown */}
                                     {activeDropdown === 'Community' && (
-                                        <div className="grid grid-cols-3 gap-6">
+                                        <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
                                             {[
                                                 { label: 'AFFILIATE', href: '/affiliate', color: 'bg-yellow-100', icon: '🤝' },
                                                 { label: 'INFLUENCER', href: '/influencer', color: 'bg-red-100', icon: '🌟' },
@@ -208,8 +216,8 @@ export function Header() {
                                             ].map((item) => (
                                                 <Link key={item.label} to={item.href} className="group block text-center">
                                                     <div className={`
-                             aspect-[4/5] rounded-3xl ${item.color} mb-4 flex items-center justify-center relative group-hover:scale-[1.02] transition-transform duration-300
-                             bg-gradient-to-br from-white/40 to-white/0
+                             aspect-[4/5] rounded-3xl ${item.color} h-96 mb-4 flex items-center justify-center relative group-hover:scale-[1.02] transition-transform duration-300
+                             bg-gradient-to-br from-white/40 to-white/0 w-full
                            `}>
                                                         <div className="text-[80px] drop-shadow-2xl">
                                                             {item.icon}
@@ -273,54 +281,55 @@ export function Header() {
                     </div>
                 </div>
 
-                {/* Mobile Menu */}
-                {mobileMenuOpen && (
-                    <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white/95 backdrop-blur-xl z-50 overflow-y-auto animate-in slide-in-from-top duration-300">
-                        <div className="container py-8">
-                            <nav className="flex flex-col gap-8">
-                                {navLinks.map((link) => (
-                                    <div key={link.label} className="flex flex-col gap-3">
-                                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-2">
-                                            {link.label}
-                                        </span>
-                                        {link.items.map((item) => (
-                                            <Link
-                                                key={item.label}
-                                                to={item.href}
-                                                className="py-3 px-4 text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-2xl transition-all"
-                                                onClick={() => setMobileMenuOpen(false)}
-                                            >
-                                                {item.label}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                ))}
-                            </nav>
-                            <div className="flex flex-col gap-4 mt-10 pt-8 border-t border-gray-100">
-                                {user ? (
-                                    <>
-                                        <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                                            <Button variant="outline" fullWidth className="rounded-xl py-4">Dashboard</Button>
+            </header>
+
+            {/* Mobile Menu - Outside header for proper z-index stacking */}
+            {mobileMenuOpen && (
+                <div className="lg:hidden fixed inset-x-0 top-[120px] lg:top-[136px] bottom-0 bg-white/95 backdrop-blur-xl z-[60] overflow-y-auto">
+                    <div className="container py-8">
+                        <nav className="flex flex-col gap-8">
+                            {navLinks.map((link) => (
+                                <div key={link.label} className="flex flex-col gap-3">
+                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-2">
+                                        {link.label}
+                                    </span>
+                                    {link.items.map((item) => (
+                                        <Link
+                                            key={item.label}
+                                            to={item.href}
+                                            className="py-3 px-4 text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-2xl transition-all"
+                                            onClick={() => setMobileMenuOpen(false)}
+                                        >
+                                            {item.label}
                                         </Link>
-                                        <Button variant="ghost" fullWidth onClick={handleSignOut} className="py-4">
-                                            Sign Out
-                                        </Button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link to="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
-                                            <Button variant="outline" fullWidth className="rounded-xl py-4 text-lg">Login</Button>
-                                        </Link>
-                                        <Link to="/auth/signup" onClick={() => setMobileMenuOpen(false)}>
-                                            <Button variant="dark" fullWidth className="rounded-xl py-4 text-lg shadow-xl shadow-purple-500/10">Sign up</Button>
-                                        </Link>
-                                    </>
-                                )}
-                            </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </nav>
+                        <div className="flex flex-col gap-4 mt-10 pt-8 border-t border-gray-100">
+                            {user ? (
+                                <>
+                                    <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                                        <Button variant="outline" fullWidth className="rounded-xl py-4">Dashboard</Button>
+                                    </Link>
+                                    <Button variant="ghost" fullWidth onClick={handleSignOut} className="py-4">
+                                        Sign Out
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
+                                        <Button variant="outline" fullWidth className="rounded-xl py-4 text-lg">Login</Button>
+                                    </Link>
+                                    <Link to="/auth/signup" onClick={() => setMobileMenuOpen(false)}>
+                                        <Button variant="dark" fullWidth className="rounded-xl py-4 text-lg shadow-xl shadow-purple-500/10">Sign up</Button>
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
-                )}
-            </header>
+                </div>
+            )}
         </div>
     )
 }
